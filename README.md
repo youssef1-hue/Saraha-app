@@ -8,10 +8,10 @@ A secure and scalable anonymous messaging platform backend built with **Node.js*
 - **Email Verification:** Integrated OTP-based verification for new registrations.
 - **Repository Pattern:** Separated database logic from business logic for better maintainability.
 - **Validation:** Strict request data validation using **Joi**.
-- **Developer Experience:** Real-time javaScript compilation and auto-restarting using `concurrently`.
+- **Developer Experience:** Real-time JavaScript compilation and auto-restarting using `concurrently`.
 
 ## 🛠️ Tech Stack
-- **Language:** javaScript
+- **Language:** JavaScript 
 - **Runtime:** Node.js (v20+)
 - **Framework:** Express.js
 - **Database:** MongoDB with Mongoose
