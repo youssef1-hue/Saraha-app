@@ -21,7 +21,7 @@ router.post("/signup",
 
 router.patch("/confirm-email",
   validation(validators.confirmEmail) ,
-   async (req, res, next) => {
+  async (req, res, next) => {
   const account = await confirmEmail(req.body);
   return SuccessResponse(res);
 });

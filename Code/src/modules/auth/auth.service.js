@@ -55,27 +55,29 @@ export const signup = async (inputs) => {
     filter: { email }
   });
 
-  if (checkUserExist) {
-    throw conflictException("User already exist");
-  }
+  console.log ({checkUserExist});  
+if (checkUserExist) {
+  console.log ({checkUserExist}); 
+  throw conflictException("User already exist");
+}
+  console.log ({checkUserExist});  
 
-  // 3. التشفير (تأكد أن generateEncryption تعمل مع النصوص فقط)
+  
   const encryptedPhone = phone ? await generateEncryption(phone) : undefined;
 
-  // 4. إنشاء المستخدم (تأكد من تمرير email هنا يدوياً)
+
   const user = await createOne({
     model: UserModel,
     data: {
       firstName,
       lastName,
-      email, // هذا السطر هو الذي يسبب الخطأ حالياً إذا سقط
+      email, 
       password: await generateHash({ plaintext: password }),
       phone: encryptedPhone
     },
   });
 
-  // 5. إرسال الـ OTP
-  // إذا أعطاك خطأ في EmailEnum، استبدله بكلمة "confirmEmail" كـ String
+ 
   await sendEmailOtp({ 
     email, 
     subject: "confirmEmail", 
