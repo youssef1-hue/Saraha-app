@@ -19,20 +19,25 @@ async function bootstrap() {
     app.use(express.urlencoded({ extended: true }));
 
     // DB connection
-    await connectDB();
+    try {
+        await connectDB();
     await connectRedis();
 const code = await createNumberOtp();
 
-// await sendEmail({
-//   to: "velorasportswear19@gmail.com",
-//   cc: ["petersaad131@gmail.com"],
-//   subject: "Confirm Email",
-//   html: emailTemplate({
-//     title: "Confirm Email",
-//     code: code
-//   })
-// });
-
+await sendEmail({
+  to: "velorasportswear19@gmail.com",
+  cc: ["petersaad131@gmail.com"],
+  subject: "Confirm Email",
+  html: emailTemplate({
+    title: "Confirm Email",
+    code: code
+  })
+});
+        
+    } catch (emailError) {
+        console.error("Email service failed but server is still running:", emailError.message);
+    }
+    
 
     //application routing
     app.get('/', (req, res) => res.send('Hello World!'))

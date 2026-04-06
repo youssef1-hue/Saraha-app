@@ -7,7 +7,7 @@ import { validation } from "../../middleware/validation.middleware.js";
 const router = Router();
 
 
-// مثال لتعديل الـ signup
+
 router.post("/signup",
   validation(validators.signup),
   async (req, res, next) => {

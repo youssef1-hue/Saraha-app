@@ -46,10 +46,9 @@ const sendEmailOtp = async ({email, subject , title} = {}) => {
 }
 
 export const signup = async (inputs) => {
-  // 1. استخراج البيانات من الـ inputs (التي هي req.body)
   const { username, email, password, phone, firstName, lastName } = inputs;
 
-  // 2. التحقق من وجود المستخدم
+  
   const checkUserExist = await findOne({
     model: UserModel,
     filter: { email }
@@ -126,10 +125,7 @@ export const requestForgotPasswordCode = async (inputs) => {
   const { email} = inputs;
   const account = await findOne({
     model: UserModel,
-    filter: {  email ,
-      confirmEmail: { $exists: true } ,
-       provider: ProviderEnum.System
-       }
+    filter: { email }
   });
   if (!account) {
     throw notFoundException({message: 'Fail  to find account'});
