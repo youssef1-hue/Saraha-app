@@ -1,0 +1,27 @@
+{
+  "name": "saraha-app",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/app.bootstrap.js",
+  "scripts": {
+    "start": "node src/app.bootstrap.js",
+    "dev": "nodemon src/app.bootstrap.js"
+  },
+  "dependencies": {
+    "argon2": "^0.44.0",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "express-rate-limit": "^7.2.0",
+    "google-auth-library": "^10.6.2",
+    "helmet": "^7.1.0",
+    "joi": "^18.1.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.23.0",
+    "multer": "^2.1.1",
+    "nodemailer": "^6.9.13",
+    "redis": "^4.7.1",
+    "uuid": "^9.0.1"
+  }
+}

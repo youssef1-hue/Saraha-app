@@ -12,7 +12,6 @@ console.log({ en: envPath[NODE_ENV] });
 
 config({ path: resolve(`./config/${envPath[NODE_ENV] ?? '.env.development'}`) })
 
-
 export const port = process.env.PORT ?? 7000
 
 export const DB_URI = process.env.DB_URI 
