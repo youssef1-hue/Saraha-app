@@ -98,26 +98,28 @@ export const decodeToken = async ({
 export const createLoginCredentials = async (user, issuer) => {
   const { accessSignature, refreshSignature } = await detectSignatureLevel(user.role);
   const jwtid = randomUUID();
+
   const access_token = await generateToken({
-    payload: { sub: user._id, extra: 250 },
+    // الـ jti يجب أن يكون هنا في الـ payload
+    payload: { sub: user._id, extra: 250, jti: jwtid }, 
     secret: accessSignature,
     options: {
       issuer: "issuer",
-      jti: jwtid,
-      audience: [TokenTypeEnum.ACCESS , user.role],
+      audience: [TokenTypeEnum.ACCESS, user.role],
       expiresIn: ACCESS_TOKEN_EXPIRES_IN,
     },
   });
+
   const refresh_token = await generateToken({
-    payload: { sub: user._id, extra: 250 },
+    // الـ jti يجب أن يكون هنا في الـ payload أيضاً
+    payload: { sub: user._id, extra: 250, jti: jwtid },
     secret: refreshSignature,
     options: {
       issuer: "issuer",
       audience: [TokenTypeEnum.REFRESH, user.role],
       expiresIn: REFRESH_TOKEN_EXPIRES_IN,
-      jti: jwtid,
-
     },
   });
+
   return { access_token, refresh_token };
 };
