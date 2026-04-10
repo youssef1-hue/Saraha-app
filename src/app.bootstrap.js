@@ -9,49 +9,37 @@ import { createNumberOtp } from './common/utils/otp.js'
 import helmet from 'helmet'
 
 async function bootstrap() {
-    const app = express()
-    
-    app.use(cors(), helmet(), express.json())
-    app.use('/Upload', express.static('../Upload'))
-    app.use(express.urlencoded({ extended: true }))
-
-    app.get('/', (req, res) => res.send('Saraha App API is Online!'))
-    app.use('/auth', authRouter)
-    app.use('/user', userRouter)
-
-    app.use((req, res) => {
-        return res.status(404).json({ message: "Invalid application routing" })
-    })
-
-    app.use((error, req, res, next) => {
-        const status = error.status || error.cause?.status || 500
-        return res.status(status).json({
-            success: false,
-            message: status === 500 ? 'something went wrong' : error.message || 'something went wrong',
-            stack: NODE_ENV === "development" ? error.stack : undefined
-        })
-    })
-
-    const server = app.listen(port, () => {
-        console.log(`🚀 Server is live on port ${port}`)
+    try {
+        const app = express()
         
-        connectDB().then(() => {
-            console.log("✅ DB Connected")
-            return connectRedis()
-        }).then(() => {
-            console.log("✅ Redis Connected")
-            return createNumberOtp()
-        }).then(code => {
-            return sendEmail({
-                to: "velorasportswear19@gmail.com",
-                cc: ["petersaad131@gmail.com"],
-                subject: "Confirm Email",
-                html: emailTemplate({ title: "Confirm Email", code: code })
+        app.use(cors(), helmet(), express.json())
+        app.use('/Upload', express.static('../Upload'))
+        app.use(express.urlencoded({ extended: true }))
+
+        app.get('/', (req, res) => res.status(200).send('API IS LIVE'))
+        app.use('/auth', authRouter)
+        app.use('/user', userRouter)
+
+        app.use((req, res) => res.status(404).json({ message: "Invalid routing" }))
+
+        app.use((error, req, res, next) => {
+            const status = error.status || 500
+            return res.status(status).json({
+                success: false,
+                message: error.message || 'Internal Server Error'
             })
-        }).catch(err => {
-            console.error("⚠️ Background Task Error:", err.message)
         })
-    })
+
+        app.listen(port, () => {
+            console.log(`🚀 Server started on port ${port}`)
+            
+            // تشغيل الخدمات في الخلفية بعد التأكد من أن السيرفر "قام"
+            connectDB().catch(err => console.log("DB Error:", err.message))
+            connectRedis().catch(err => console.log("Redis Error:", err.message))
+        })
+    } catch (criticalError) {
+        console.error("FATAL ERROR DURING BOOTSTRAP:", criticalError.message)
+    }
 }
 
 export default bootstrap
