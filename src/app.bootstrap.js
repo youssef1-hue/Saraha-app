@@ -33,7 +33,6 @@ async function bootstrap() {
         app.listen(port, () => {
             console.log(`🚀 Server started on port ${port}`)
             
-            // تشغيل الخدمات في الخلفية بعد التأكد من أن السيرفر "قام"
             connectDB().catch(err => console.log("DB Error:", err.message))
             connectRedis().catch(err => console.log("Redis Error:", err.message))
         })
