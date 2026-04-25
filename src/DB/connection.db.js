@@ -15,7 +15,6 @@ export const connectDB = async () => {
     
     await UserModel.syncIndexes();
   } catch (error) {
-    console.log("DB connection failed❌", error.message);
-    throw error;
+    console.log("DB connection failed❌", error.message)
   }
 };

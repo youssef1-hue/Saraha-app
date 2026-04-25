@@ -3,8 +3,6 @@ import { config } from 'dotenv'
 
 export const NODE_ENV = process.env.NODE_ENV ?? 'development'
 
-// ✅ بس لو development حمّل الـ .env
-// على Railway (production) الـ variables بتيجي تلقائي
 if (NODE_ENV === 'development') {
     const envPath = {
         development: `.env.development`,

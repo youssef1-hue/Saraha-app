@@ -36,4 +36,5 @@ export const findOneAndUpdate = async ({
     options = { new: true },
 }) => {
     return await model.findOneAndUpdate(filter, update, options);
+    return await model.create(data, options);
 };

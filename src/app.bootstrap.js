@@ -8,9 +8,10 @@ import helmet from 'helmet'
 
 async function bootstrap() {
     const app = express()
+
     await connectDB()
     await connectRedis()
-    
+
     app.use(cors(), helmet(), express.json())
     app.use('/Upload', express.static('../Upload'))
     app.use(express.urlencoded({ extended: true }))
@@ -25,6 +26,7 @@ async function bootstrap() {
 
     app.use((error, req, res, next) => {
         const status = error.status || error.cause?.status || 500
+
         return res.status(status).json({
             success: false,
             message: status === 500 ? 'something went wrong' : error.message || 'something went wrong',
@@ -37,4 +39,4 @@ async function bootstrap() {
     })
 }
 
-export default bootstrap
+export default bootstrap;
