@@ -1,32 +1,35 @@
 # Saraha App - Backend API 🚀
 
-A secure and scalable anonymous messaging platform backend built with **Node.js**, **Express**, and **TypeScript**. This project focuses on clean architecture, data security, and professional API standards.
+A secure and scalable anonymous messaging platform backend built with Node.js and Express.js.  
+The project focuses on clean architecture, authentication, data security, and professional REST API standards.
 
 ## 🌟 Features
-- **User Authentication:** Complete Signup/Login flow with JWT and password hashing.
-- **Data Encryption:** Sensitive fields like phone numbers are encrypted at rest using AES-256.
-- **Email Verification:** Integrated OTP-based verification for new registrations.
-- **Repository Pattern:** Separated database logic from business logic for better maintainability.
-- **Validation:** Strict request data validation using **Joi**.
-- **Developer Experience:** Real-time JavaScript compilation and auto-restarting using `concurrently`.
+
+- Implemented secure authentication flows including Signup, Login, Logout, Refresh Tokens, and Password Reset.
+- Built JWT-based authentication with Access and Refresh Tokens.
+- Encrypted sensitive user data such as phone numbers using AES-256 encryption.
+- Integrated OTP-based Email Verification and Forgot Password flows.
+- Used Redis for OTP storage, token revocation, and temporary blocking after failed attempts.
+- Applied Repository Pattern to separate database logic from business logic.
+- Added strict request validation using Joi.
+- Improved developer experience with auto-restarting during development using Concurrently and Nodemon.
 
 ## 🛠️ Tech Stack
-- **Language:** JavaScript 
-- **Runtime:** Node.js (v20+)
-- **Framework:** Express.js
-- **Database:** MongoDB with Mongoose
-- **Security:** Bcrypt, CryptoJS, JWT
-- **Tooling:** Git, Thunder Client, Concurrently
+
+**Language:** JavaScript  
+**Backend:** Node.js, Express.js  
+**Database:** MongoDB, Mongoose, Redis  
+**Authentication & Security:** JWT, OAuth, OTP, bcrypt, AES-256  
+**Validation:** Joi  
+**Tools:** Git, GitHub, Thunder Client, Concurrently, Nodemon  
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js installed (v20.6.0+).
-- MongoDB Atlas account.
 
-### Installation & Run
-1. Clone the repository:
-   ```bash
+- Node.js installed v20.6.0+
+- MongoDB Atlas account
+- Redis server or Redis cloud account
    git clone [https://github.com/youssef1-hue/Saraha_App.git](https://github.com/youssef1-hue/Saraha_App.git)
 
    Navigate to the project directory:
